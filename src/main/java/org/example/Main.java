@@ -14,59 +14,49 @@ import java.util.List;
 public class Main{
     public static void main(String[] args) {
 
-        // Arreglo de objetivos a alcanzar en cada viaje (pueden contener objetivos inválidos)
-        int[] targets = {1, 2, 3, -5, 5, -6};
-
-        // Posición inicial desde donde se comienzan los viajes
+        int[] targets = {1, 2, 3, 4, 5, 6};
         int startPosition = 0;
 
-        // Mensaje inicial con los objetivos
-        System.out.println("Comenzando viajes de IDA y de VUELTA para los elementos: " + Arrays.toString(targets));
 
-        // Lista para acumular números inválidos encontrados en el arreglo
+        //ELista para evaluar números invalidos
         List<Integer> invalidNumbers = new ArrayList<>();
 
-        // Recorre los objetivos y agrega a la lista los que sean <= 0 (se consideran inválidos)
-        for (int number : targets) {
-            if (number <= 0) {
+        System.out.println("Evaluando los elementos dentro del arreglo: " + Arrays.toString(targets));
+
+        //Evalua cada uno de los elementos del arreglo, se deja de ejecutar si hay un valor invalido
+        for(int number : targets){
+            if(number < startPosition){
                 invalidNumbers.add(number);
             }
         }
 
-        // Si se encontraron números inválidos, se reportan y se termina la ejecución
-        if (!invalidNumbers.isEmpty()) {
-            System.err.println("El arreglo  de números contienen números negativos");
-            System.err.println("Los números negativos dentro del programa son: " + invalidNumbers);
+        //Verificar si hay la lista a evaluar contiene numeros negativos
+        if(!invalidNumbers.isEmpty()){
+            System.err.println("El arreglo de números tiene valores invalidos");
+            System.err.println("Los valores invalidos son: " + invalidNumbers);
             return;
         }
 
-        // Para cada objetivo válido realiza un viaje de IDA y VUELTA
-        for (int target : targets) {
+        //Si no hay numeros positivos continua la ejecución del programa y realiza la evaluación
+        for(int target : targets){
 
-            System.out.println("Comenzando Viaje de IDA y vuelta para el objetivo: " + target);
+            System.out.println("Evaluando el elemento: " + target);
 
-            // IDA: incrementar la posición hasta alcanzar el objetivo
             System.out.println("IDA");
-            while (startPosition < target) {
-                System.out.println(startPosition); // muestra la posición actual antes de moverse
-                startPosition++; // avanza una unidad hacia el objetivo
+            while(startPosition < target){
+                System.out.println(startPosition);
+                startPosition++;
             }
-
-            // Muestra la posición cuando se alcanza el objetivo
             System.out.println(startPosition);
 
-            // VUELTA: decrementar la posición hasta regresar a 0
             System.out.println("VUELTA");
-            while (startPosition > 0) {
-                System.out.println(startPosition); // muestra la posición actual antes de retroceder
-                startPosition--; // retrocede una unidad hacia 0
+            while(startPosition > 0){
+                System.out.println(startPosition);
+                startPosition--;
             }
-
-            // Muestra la posición final después de la vuelta (debería ser 0)
             System.out.println(startPosition + "\n");
         }
 
-        // Mensaje final indicando que se completaron todos los viajes
-        System.out.println("Viajes completados para todo los objetivos");
+
     }
 }
